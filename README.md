@@ -66,3 +66,15 @@ What I Did (Step-by-Step Breakdown)
 * Feature Scaling
 * Exploratory Data Analysis (EDA)
 
+
+| **Model Type**                   | **Needs Scaling?** | **Why**                                                                                                                                                                                                |
+| -------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Decision Tree**                | ❌ No               | Decision Trees split data at certain feature values (like “Age ≤ 18”). They do not use distances or gradient calculations. Scaling doesn't affect the splits or performance.                           |
+| **Random Forest**                | ❌ No               | Random Forest is an ensemble of Decision Trees. Since each tree operates on splits, scaling is again not required or beneficial.                                                                       |
+| **XGBoost / LightGBM**           | ❌ No               | These are advanced gradient boosting algorithms based on decision trees. Like simple trees, they find optimal split points and do not rely on feature magnitudes.                                      |
+| **Logistic Regression**          | ✅ Yes              | Logistic Regression uses gradient descent to minimize a cost function. If features have vastly different scales, convergence becomes slow or unstable. Scaling helps it learn efficiently.             |
+| **K-Nearest Neighbors (KNN)**    | ✅ Yes              | KNN calculates the distance (e.g., Euclidean) between data points. If one feature is on a larger scale (like Fare), it will dominate the distance metric, leading to biased predictions.               |
+| **Support Vector Machine (SVM)** | ✅ Yes              | SVM works by maximizing the margin between classes using a hyperplane. The position of the hyperplane is highly sensitive to the magnitude of feature values. Scaling ensures fair margin computation. |
+| **Neural Networks**              | ✅ Yes              | Neural networks optimize weights via gradient descent. If input features vary in scale, gradients can explode or vanish. Scaling ensures better convergence and more stable learning.                  |
+
+
